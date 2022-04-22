@@ -1,8 +1,9 @@
--- Adaptation Lannion
+-- TREUST Nolwenn
+-- ZALLOT Tristan
+-- Groupe F12
 -- create schema matski_update;
 set schema 'matski_update';
 
---
 drop table if exists _ARTICLE cascade ;
 
 drop table if exists _CATEGORIE   cascade ;
@@ -110,7 +111,16 @@ create table _CONTACT (
   constraint PK__CONTACT primary key (NUMCONTACT)
 ) ;
 
---- à réfléchir car 2 contacts 
+insert into
+     matski_update._CONTACT(NOMCONTACT,TELEPHONECONTACT,FONCTIONCONTACT,NUMCLIENT)
+   select NOMCONTACT1,TELEPHONECONTACT1, FONCTIONCONTACT1,NUMCLIENT
+   from matski.CLIENT ;
+   
+insert into
+     matski_update._CONTACT(NOMCONTACT,TELEPHONECONTACT,FONCTIONCONTACT,NUMCLIENT)
+   select NOMCONTACT2,TELEPHONECONTACT2, FONCTIONCONTACT2,NUMCLIENT
+   from matski.CLIENT 
+   where NOMCONTACT2 is not null ;
 
 /*==============================================================*/
 /* Table : COMMANDE                                             */
@@ -183,7 +193,7 @@ create table _TARIFVENTE (
    NUMARTICLE           INTEGER              not null,
    CODELISTE            CHAR(1)              not null,
    PRIXVENTE            DECIMAL(10,2)        not null,
-   constraint PK__TARIFVENTE primary key (NUMARTICLE, CODELISTE)
+   constraint PK__TARIFVENTE primary key (NUMARTICLE)
 );
 
 insert into
@@ -218,7 +228,7 @@ alter table _SE_DECOMPOSE
       references _CATEGORIE (NUMCATEGORIE);
 
 alter table _SE_DECOMPOSE
-   add constraint FK_SEDECOMPO_CATEGORI foreign key (NUMCATEGORIE)
+   add constraint FK_SEDECOMPO2_CATEGORI foreign key (NUMCATEGORIE)
       references _CATEGORIE (NUMCATEGORIE);
 
 alter table _CLIENT
