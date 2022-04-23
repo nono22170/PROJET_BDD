@@ -1,6 +1,6 @@
 # Projet Base de Données (BDD) 
 
-Mon travail consistait à modifier et corriger une base de données existantes pour qu'elle soit fonctionnel et optimisée.
+Mon travail consistait à modifier et corriger une base de données existante pour qu'elle soit fonctionnelle et optimisée.
 
 ## Les différentes étapes 
 
